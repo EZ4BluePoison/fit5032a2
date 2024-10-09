@@ -27,7 +27,7 @@ const sendEmail = async (recipientEmail, subject, text, attachment) => {
 }
 
 // Example usage
-sendEmail('652857323@qq.com', 'Test Email', 'Hello, this is a test email with an attachment', {
+sendEmail('user@example.com', 'Test Email', 'Hello, this is a test email with an attachment', {
   content: 'BASE64_ENCODED_CONTENT',
   filename: 'test.pdf',
   type: 'application/pdf'

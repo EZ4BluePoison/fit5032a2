@@ -8,6 +8,7 @@
         <router-link to="/personalized-content">Personalized Content</router-link>
         <router-link to="/community">Community</router-link>
         <router-link to="/resources">Resource Center</router-link>
+        <router-link to="/FirebaseSigninView">Firebase Login</router-link>
       </nav>
     </header>
     <main>

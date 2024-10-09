@@ -1,23 +1,30 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import store from './store'
+import { getAuth } from 'firebase/auth'
 
 import MainLayout from './components/MainLayout.vue'
 import Home from './views/HomePage.vue'
-import LoginSession from './views/LoginSession.vue'
-import RegisterSession from './views/RegisterSession.vue'
 import Dashboard from './views/DashBoard.vue'
 import Privacy from './views/PrivacyPolicy.vue'
 import Help from './views/HelpPage.vue'
 import PersonalizedContent from './views/PersonalisedContent.vue'
 import Community from './views/CommunityPage.vue'
 import ResourceCenter from './views/ResourcesCenter.vue'
+import FirebaseSigninView from './views/FirebaseRegisterView.vue'
+import FirebaseRegisterView from './views/FirebaseRegisterView.vue'
+
+import LoginPage from '@/views/LoginPage.vue'
+import RegisterPage from '@/views/RegisterPage.vue'
 
 const routes = [
+  { path: '/', redirect: '/login' }, // 默认重定向到 /login
+  { path: '/login', component: LoginPage },
+  { path: '/register', component: RegisterPage },
+
   {
     path: '/',
     component: MainLayout,
     children: [
-      { path: '', component: Home, meta: { requiresAuth: true } },
+      { path: 'home', component: Home, meta: { requiresAuth: true } },
       {
         path: 'dashboard',
         component: Dashboard,
@@ -27,11 +34,11 @@ const routes = [
       { path: 'help', component: Help },
       { path: 'personalized-content', component: PersonalizedContent },
       { path: 'community', component: Community },
-      { path: 'resources', component: ResourceCenter }
+      { path: 'resources', component: ResourceCenter },
+      { path: '/FireLogin', name: 'FireLogin', component: FirebaseSigninView },
+      { path: 'register', component: FirebaseRegisterView }
     ]
-  },
-  { path: '/login', component: LoginSession },
-  { path: '/register', component: RegisterSession }
+  }
 ]
 
 const router = createRouter({
@@ -40,13 +47,13 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const isAuthenticated = store.getters.isAuthenticated
-  const isAdmin = store.getters.isAdmin
+  const auth = getAuth()
+  const user = auth.currentUser
 
-  if (to.meta.requiresAuth && !isAuthenticated) {
+  if (to.path === '/login' && user) {
+    next('/home')
+  } else if (to.meta.requiresAuth && !user) {
     next('/login')
-  } else if (to.meta.requiresAdmin && !isAdmin) {
-    next('/')
   } else {
     next()
   }

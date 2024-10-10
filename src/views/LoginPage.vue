@@ -26,9 +26,9 @@ const login = async () => {
     const user = userCredential.user
 
     if (user.email === 'admin@example.com') {
-      router.push('/dashboard') // 管理员跳转到 /dashboard
+      router.push('/dashboard')
     } else {
-      router.push('/home') // 普通用户跳转到主页 /home
+      router.push('/home')
     }
   } catch (error) {
     alert('Login failed, please check your email and password.')
@@ -37,6 +37,4 @@ const login = async () => {
 }
 </script>
 
-<style scoped>
-/* 样式 */
-</style>
+<style scoped></style>

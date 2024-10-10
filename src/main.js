@@ -4,7 +4,7 @@ import router from './router'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { initializeApp } from 'firebase/app'
 
-// 初始化 Firebase
+//  Firebase
 const firebaseConfig = {
   apiKey: 'AIzaSyBiUadCSCORNNTILHpiN-gy9-u3Ymi0BhU',
   authDomain: 'zichao-64932.firebaseapp.com',
@@ -18,20 +18,19 @@ initializeApp(firebaseConfig)
 const auth = getAuth()
 const app = createApp(App)
 
-// 在 Firebase 完成身份验证后再启动应用
 onAuthStateChanged(auth, (user) => {
   if (user) {
     console.log('User is authenticated:', user.email)
-    // 根据用户角色跳转
+
     if (user.email === 'admin@example.com') {
-      router.push('/dashboard') // 管理员重定向到 dashboard
+      router.push('/dashboard')
     } else {
-      router.push('/home') // 普通用户重定向到 home
+      router.push('/home')
     }
   } else {
     console.log('User not authenticated, redirecting to login...')
-    router.push('/login') // 未登录用户跳转到登录页面
+    router.push('/login')
   }
 
-  app.use(router).mount('#app') // 在身份验证完成后再启动应用
+  app.use(router).mount('#app')
 })

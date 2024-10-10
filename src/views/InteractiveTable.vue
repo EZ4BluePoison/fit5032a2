@@ -44,7 +44,6 @@ import 'datatables.net-dt/css/jquery.dataTables.css'
 import $ from 'jquery'
 import 'datatables.net'
 
-// Mock 用户和产品数据（你可以用 Mockaroo 生成）
 const userData = ref([
   { id: 1, name: 'John Doe', email: 'john@example.com' },
   { id: 2, name: 'Jane Smith', email: 'jane@example.com' },
@@ -62,14 +61,14 @@ onMounted(() => {
     paging: true,
     searching: true,
     ordering: true,
-    pageLength: 10 // 每页显示10条
+    pageLength: 10
   })
 
   $('#productTable').DataTable({
     paging: true,
     searching: true,
     ordering: true,
-    pageLength: 10 // 每页显示10条
+    pageLength: 10
   })
 })
 </script>

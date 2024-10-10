@@ -2,20 +2,16 @@
 import { ref, onMounted, nextTick } from 'vue'
 import $ from 'jquery'
 import 'datatables.net'
-import mockData from '@/assets/MOCK_DATA.json' // 导入 JSON 数据
+import mockData from '@/assets/MOCK_DATA.json'
 
-// 响应式数据存储
 const personalisedContent = ref([])
 
 onMounted(async () => {
   try {
-    // 直接使用导入的数据初始化内容
     personalisedContent.value = mockData
 
-    // 等待 Vue 完成 DOM 渲染
     await nextTick()
 
-    // 初始化 DataTables
     $('#personalisedContentTable').DataTable({
       paging: true,
       searching: true,
@@ -30,7 +26,6 @@ onMounted(async () => {
 
 <template>
   <div>
-    <!-- Header with Navigation -->
     <header>
       <nav>
         <router-link to="/">Home</router-link>
@@ -43,11 +38,9 @@ onMounted(async () => {
       </nav>
     </header>
 
-    <!-- Main Content (Personalized Content) -->
     <main>
       <h2>Your Personalised Content</h2>
 
-      <!-- 使用 DataTables 的表格来显示个性化内容 -->
       <table id="personalisedContentTable" class="display">
         <thead>
           <tr>
@@ -64,7 +57,6 @@ onMounted(async () => {
       </table>
     </main>
 
-    <!-- Footer -->
     <footer>
       <p>
         &copy; If you need any help, please contact
@@ -75,7 +67,6 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-/* Header and Navigation Styles */
 header {
   background-color: #f8f9fa;
   padding: 10px;
@@ -87,7 +78,6 @@ nav a {
   color: #333;
 }
 
-/* Personalized Content Styles */
 h2 {
   color: #2e86c1;
 }
@@ -114,7 +104,6 @@ th {
   background-color: #f2f2f2;
 }
 
-/* Footer Styles */
 footer {
   background-color: #f8f9fa;
   text-align: center;

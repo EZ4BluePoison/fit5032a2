@@ -91,7 +91,7 @@
 export default {
   data() {
     return {
-      email: 'zhee0056@student.monash.edu' // 添加 email 数据
+      email: 'zhee0056@student.monash.edu'
     }
   }
 }

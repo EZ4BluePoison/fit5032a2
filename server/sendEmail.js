@@ -11,8 +11,11 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 // 加载自定义路径的 .env 文件
-dotenv.config()
+dotenv.config({ path: path.join(__dirname, '../sendgrid.env') })
+
+// 确认环境变量是否正确加载
 console.log('SENDGRID_API_KEY:', process.env.SENDGRID_API_KEY)
+
 // 设置 SendGrid API Key
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 

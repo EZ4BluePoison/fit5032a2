@@ -1,7 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { getAuth } from 'firebase/auth'
-
-import MainLayout from './components/MainLayout.vue'
 import Home from './views/HomePage.vue'
 import Dashboard from './views/DashBoard.vue'
 import Privacy from './views/PrivacyPolicy.vue'
@@ -9,36 +6,23 @@ import Help from './views/HelpPage.vue'
 import PersonalizedContent from './views/PersonalisedContent.vue'
 import Community from './views/CommunityPage.vue'
 import ResourceCenter from './views/ResourcesCenter.vue'
-import FirebaseSigninView from './views/FirebaseRegisterView.vue'
-import FirebaseRegisterView from './views/FirebaseRegisterView.vue'
 
 import LoginPage from '@/views/LoginPage.vue'
 import RegisterPage from '@/views/RegisterPage.vue'
+import { getAuth } from 'firebase/auth'
 
 const routes = [
-  { path: '/', redirect: '/login' }, // 默认重定向到 /login
-  { path: '/login', component: LoginPage },
-  { path: '/register', component: RegisterPage },
-
-  {
-    path: '/',
-    component: MainLayout,
-    children: [
-      { path: 'home', component: Home, meta: { requiresAuth: true } },
-      {
-        path: 'dashboard',
-        component: Dashboard,
-        meta: { requiresAuth: true, requiresAdmin: true }
-      },
-      { path: 'privacy', component: Privacy },
-      { path: 'help', component: Help },
-      { path: 'personalized-content', component: PersonalizedContent },
-      { path: 'community', component: Community },
-      { path: 'resources', component: ResourceCenter },
-      { path: '/FireLogin', name: 'FireLogin', component: FirebaseSigninView },
-      { path: 'register', component: FirebaseRegisterView }
-    ]
-  }
+  { path: '/', component: Home }, // 主页可以对所有用户开放
+  { path: '/login', component: LoginPage }, // 登录页面对所有用户开放
+  { path: '/register', component: RegisterPage }, // 注册页面对所有用户开放
+  { path: '/home', component: Home }, // 主页
+  { path: '/dashboard', component: Dashboard, meta: { requiresAuth: true } }, // 只有登录用户才能访问
+  { path: '/privacy', component: Privacy }, // 隐私政策页面开放
+  { path: '/help', component: Help }, // 帮助页面开放
+  { path: '/personalized-content', component: PersonalizedContent }, // 个性化内容页面开放
+  { path: '/community', component: Community }, // 社区页面开放
+  { path: '/resources', component: ResourceCenter }, // 资源中心开放
+  { path: '/FireLogin', name: 'FireLogin', component: LoginPage } // Firebase 登录
 ]
 
 const router = createRouter({
@@ -46,16 +30,16 @@ const router = createRouter({
   routes
 })
 
+// 路由守卫，只对设置了 `requiresAuth` 的页面进行保护
 router.beforeEach((to, from, next) => {
   const auth = getAuth()
   const user = auth.currentUser
 
-  if (to.path === '/login' && user) {
-    next('/home')
-  } else if (to.meta.requiresAuth && !user) {
+  // 如果页面需要登录才能访问且用户未登录，跳转到登录页面
+  if (to.meta.requiresAuth && !user) {
     next('/login')
   } else {
-    next()
+    next() // 允许访问
   }
 })
 

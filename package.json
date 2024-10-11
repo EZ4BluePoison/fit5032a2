@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "concurrently \"npm run frontend\" \"npm run backend\"",
     "frontend": "vite",
-    "backend": "dotenv -e ./sendgrid.env -- node server/server.js",
+    "backend": "npx dotenv -e ./server/sendgrid.env -- node server/server.js",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",

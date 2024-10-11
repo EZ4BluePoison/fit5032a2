@@ -22,7 +22,8 @@ const routes = [
   { path: '/personalized-content', component: PersonalizedContent },
   { path: '/community', component: Community },
   { path: '/resources', component: ResourceCenter },
-  { path: '/FireLogin', name: 'FireLogin', component: LoginPage }
+  { path: '/FireLogin', name: 'FireLogin', component: LoginPage },
+  { path: '/FireRegister', name: 'FireRegister', component: RegisterPage }
 ]
 
 const router = createRouter({

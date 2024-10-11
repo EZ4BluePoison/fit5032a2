@@ -85,7 +85,7 @@ export default {
     return {
       home2Rating: 0,
       homepageRating: 0,
-      email: 'zhee0056@student.monash.edu' // 添加 email 数据
+      email: 'zhee0056@student.monash.edu'
     }
   },
   methods: {

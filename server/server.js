@@ -1,19 +1,19 @@
+import dotenv from 'dotenv'
 import express from 'express'
 import bodyParser from 'body-parser'
 import sgMail from '@sendgrid/mail'
 import cors from 'cors'
-import dotenv from 'dotenv'
 import path from 'path'
+import fs from 'fs'
 import { fileURLToPath } from 'url'
 
-// 使用 __dirname 替代方案，因为 ES 模块没有 __dirname
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-// 加载自定义路径的 .env 文件
-dotenv.config()
-console.log('SENDGRID_API_KEY:', process.env.SENDGRID_API_KEY)
-// 设置 SendGrid API Key
+const envPath = path.resolve(__dirname, '../sendgrid.env')
+
+dotenv.config({ path: envPath })
+
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 const app = express()

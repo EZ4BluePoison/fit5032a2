@@ -34,6 +34,7 @@ const login = async () => {
     alert('Login failed, please check your email and password.')
     console.log('Login error:', error.message)
   }
+  window.location.href = '/'
 }
 </script>
 

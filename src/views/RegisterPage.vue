@@ -23,11 +23,13 @@ const router = useRouter()
 const register = async () => {
   try {
     await createUserWithEmailAndPassword(auth, email.value, password.value)
-    alert('Registration successful, please login.')
-    router.push('/login')
+    alert('Registration successful.')
+
+    router.push('/home')
   } catch (error) {
     alert(error.message)
   }
+  window.location.href = '/'
 }
 </script>
 

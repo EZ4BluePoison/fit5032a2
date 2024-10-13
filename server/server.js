@@ -4,7 +4,6 @@ import bodyParser from 'body-parser'
 import sgMail from '@sendgrid/mail'
 import cors from 'cors'
 import path from 'path'
-import fs from 'fs'
 import { fileURLToPath } from 'url'
 
 const __filename = fileURLToPath(import.meta.url)
